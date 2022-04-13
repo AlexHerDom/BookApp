@@ -18,14 +18,5 @@ class BookViewModel @Inject constructor(
     fun getBooks() = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         emit(getBooksUseCase.invoke())
-
-       /* if (networkHelper.isNetworkConnected()) {
-            booksUseCase().let {
-                if (it.isSuccessful)
-                    books.postValue(Resource.success(it.body()))
-                else
-                    books.postValue(Resource.error(it.errorBody().toString(), null))
-            }
-        } else books.postValue(Resource.error("No internet connection", null))*/
     }
 }

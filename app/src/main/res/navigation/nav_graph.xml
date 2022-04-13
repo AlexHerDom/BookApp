@@ -9,7 +9,11 @@
         android:id="@+id/nav_home"
         android:name="com.mylibrary.bookapp.presentation.ui.view.fragments.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_nav_home_to_eventDescriptionFragment"
+            app:destination="@id/eventDescriptionFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_gallery"
@@ -22,4 +26,15 @@
         android:name="com.mylibrary.bookapp.presentation.ui.view.fragments.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/eventDescriptionFragment"
+        android:name="com.mylibrary.bookapp.presentation.ui.view.fragments.EventDescriptionFragment"
+        android:label="EventDescriptionFragment"
+        tools:layout="@layout/fragment_event_description">
+        <argument
+            android:name="eventId"
+            app:argType="integer" />
+    </fragment>
+
 </navigation>

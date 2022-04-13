@@ -64,12 +64,14 @@
         android:id="@+id/ivMap"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:adjustViewBounds="true"
         app:layout_constraintBottom_toTopOf="@+id/floatingActionButton"
         app:layout_constraintEnd_toEndOf="@+id/tvContact"
         app:layout_constraintStart_toStartOf="@+id/tvContact"
-        app:layout_constraintTop_toBottomOf="@+id/tvContact" />
+        app:layout_constraintTop_toBottomOf="@+id/tvContact"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ProgressBar
         android:id="@+id/progressBar"

@@ -4,7 +4,7 @@ import com.mylibrary.core.data.BookDataSource
 import com.mylibrary.core.data.Resource
 import com.mylibrary.core.domain.Book
 
-class MyFakeLibraryBookDataSource() : BookDataSource {
+class FakeBookDataSourceImp() : BookDataSource {
 
     override suspend fun add(book: Book) {
 

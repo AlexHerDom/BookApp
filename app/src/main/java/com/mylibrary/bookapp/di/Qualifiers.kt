@@ -3,7 +3,13 @@ package com.mylibrary.bookapp.di
 import javax.inject.Qualifier
 
 @Qualifier
-annotation class MyBookDataSource
+annotation class BookDataSourceQualifier
 
 @Qualifier
-annotation class FakeBookDataSource
+annotation class FakeBookDataSourceQualifier
+
+@Qualifier
+annotation class EventDataSourceQualifier
+
+@Qualifier
+annotation class FakeEventDataSourceQualifier

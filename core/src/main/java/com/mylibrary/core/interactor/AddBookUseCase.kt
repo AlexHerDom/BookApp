@@ -1,8 +1,8 @@
 package com.mylibrary.core.interactor
 
-import com.mylibrary.core.data.BoookRepository
+import com.mylibrary.core.data.BookRepository
 import com.mylibrary.core.domain.Book
 
-class AddBookUseCase(private val bookRepository: BoookRepository) {
+class AddBookUseCase(private val bookRepository: BookRepository) {
     suspend operator fun invoke(book: Book) = bookRepository.add(book)
 }

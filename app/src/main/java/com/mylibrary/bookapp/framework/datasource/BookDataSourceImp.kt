@@ -6,7 +6,7 @@ import com.mylibrary.core.data.BookDataSource
 import com.mylibrary.core.data.Resource
 import com.mylibrary.core.domain.Book
 
-class MyLibraryBookDataSource(private val api: BookService) : BookDataSource {
+class BookDataSourceImp(private val api: BookService) : BookDataSource {
 
     override suspend fun add(book: Book) {
 

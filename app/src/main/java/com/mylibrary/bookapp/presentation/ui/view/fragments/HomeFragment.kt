@@ -7,8 +7,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mylibrary.bookapp.presentation.ui.adapter.EventAdapter
 import com.mylibrary.bookapp.presentation.ui.viewmodel.BookViewModel
+import com.mylibrary.bookapp.presentation.ui.viewmodel.EventViewModel
 import com.mylibrary.core.data.Status
 import dagger.hilt.android.AndroidEntryPoint
 import mylibrary.bookapp.databinding.FragmentHomeBinding
@@ -16,11 +20,9 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
-
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-
-    private val bookViewModel: BookViewModel by viewModels()
+    private val eventViewModel: EventViewModel by viewModels()
     private lateinit var eventAdapter: EventAdapter
 
     override fun onCreateView(
@@ -35,14 +37,15 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-       initObservers()
+        initAdapter()
+        initObservers()
     }
 
     private fun initObservers() {
-        bookViewModel.getBooks().observe(viewLifecycleOwner) {
+        eventViewModel.getEvents().observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.SUCCESS -> {
-                    //eventAdapter.submitList(it.data.orEmpty())
+                    eventAdapter.submitList(it.data?.data.orEmpty())
                     hideProgress()
                 }
                 Status.LOADING -> {
@@ -56,12 +59,11 @@ class HomeFragment : Fragment() {
         }
     }
 
-    /* private fun initAdapter() {
+    private fun initAdapter() {
         eventAdapter = EventAdapter { event ->
-            val action =
-                com.mylibrary.bookapp.ui.view.fragments.MainFragmentDirections.actionMainFragmentToEventDescriptionFragment(
-                    event.id
-                )
+            val action = HomeFragmentDirections.actionNavHomeToEventDescriptionFragment(
+                event.id
+            )
             findNavController().navigate(action)
         }
 
@@ -72,7 +74,7 @@ class HomeFragment : Fragment() {
                 setHasFixedSize(true)
             }
         }
-    }*/
+    }
 
     private fun showProgress() {
         binding.progressBar.visibility = View.VISIBLE
