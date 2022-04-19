@@ -12,4 +12,4 @@ annotation class FakeBookDataSourceQualifier
 annotation class EventDataSourceQualifier
 
 @Qualifier
-annotation class FakeEventDataSourceQualifier
+annotation class DBDataSourceQualifier

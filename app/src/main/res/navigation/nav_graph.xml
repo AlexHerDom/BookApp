@@ -16,10 +16,14 @@
     </fragment>
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.mylibrary.bookapp.presentation.ui.view.fragments.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_my_events"
+        android:name="com.mylibrary.bookapp.presentation.ui.view.fragments.MyEventsFragment"
+        android:label="@string/menu_my_events"
+        tools:layout="@layout/fragment_my_events" >
+        <action
+            android:id="@+id/action_nav_my_events_to_eventDescriptionFragment"
+            app:destination="@id/eventDescriptionFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_slideshow"

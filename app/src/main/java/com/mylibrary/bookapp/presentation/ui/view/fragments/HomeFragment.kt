@@ -60,7 +60,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        eventAdapter = EventAdapter { event ->
+        eventAdapter = EventAdapter(false) { event ->
             val action = HomeFragmentDirections.actionNavHomeToEventDescriptionFragment(
                 event.id
             )

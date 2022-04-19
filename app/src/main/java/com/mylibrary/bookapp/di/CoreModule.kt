@@ -1,10 +1,11 @@
 package com.mylibrary.bookapp.di
 
+import com.mylibrary.bookapp.db.AppDao
 import com.mylibrary.bookapp.framework.datasource.BookDataSourceImp
 import com.mylibrary.bookapp.framework.datasource.EventDataSourceImp
 
 import com.mylibrary.bookapp.framework.datasource.FakeBookDataSourceImp
-import com.mylibrary.bookapp.framework.datasource.FakeEventDataSource
+import com.mylibrary.bookapp.framework.datasource.DataBaseEventDataSourceImp
 
 import com.mylibrary.bookapp.framework.network.BookService
 import com.mylibrary.bookapp.framework.network.EventService
@@ -13,10 +14,7 @@ import com.mylibrary.core.data.BookDataSource
 import com.mylibrary.core.data.BookRepository
 import com.mylibrary.core.data.EventDataSource
 import com.mylibrary.core.data.EventRepository
-
-import com.mylibrary.core.interactor.GetBooksUseCase
-import com.mylibrary.core.interactor.GetEventDescriptionUseCase
-import com.mylibrary.core.interactor.GetEventsUseCase
+import com.mylibrary.core.interactor.*
 
 import dagger.Module
 import dagger.Provides
@@ -57,17 +55,18 @@ object CoreModule {
     fun provideEventDataSource(apiService: EventService): EventDataSource =
         EventDataSourceImp(apiService)
 
-    @FakeEventDataSourceQualifier
+    @DBDataSourceQualifier
     @Singleton
     @Provides
-    fun provideFakeEventDataSource(): EventDataSource = FakeEventDataSource()
+    fun provideDataBaseEventDataSource(appDao: AppDao): EventDataSource =
+        DataBaseEventDataSourceImp(appDao)
 
     @Singleton
     @Provides
     fun provideEventRepository(
         @EventDataSourceQualifier eventDataSource: EventDataSource,
-        @FakeEventDataSourceQualifier fakeEventDataSource: EventDataSource
-    ) = EventRepository(eventDataSource, fakeEventDataSource)
+        @DBDataSourceQualifier dbEventDataSource: EventDataSource
+    ) = EventRepository(eventDataSource, dbEventDataSource)
 
     @Singleton
     @Provides
@@ -78,4 +77,19 @@ object CoreModule {
     @Provides
     fun provideGetEventDescriptionUseCase(eventRepository: EventRepository): GetEventDescriptionUseCase =
         GetEventDescriptionUseCase(eventRepository)
+
+    @Singleton
+    @Provides
+    fun provideSaveEventUseCase(eventRepository: EventRepository): SaveEventUseCase =
+        SaveEventUseCase(eventRepository)
+
+    @Singleton
+    @Provides
+    fun provideGetMyEventsEventUseCase(eventRepository: EventRepository): GetMyEventsUseCase =
+        GetMyEventsUseCase(eventRepository)
+
+    @Singleton
+    @Provides
+    fun provideDeleteEventUseCase(eventRepository: EventRepository): DeleteEventUseCase =
+        DeleteEventUseCase(eventRepository)
 }

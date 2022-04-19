@@ -17,18 +17,3 @@ class BookRepository(
 
 
 }
-
-class Hola:BookDataSource{
-    override suspend fun add(book: Book) {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun getBooks(): Resource<List<Book>> {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun remove(book: Book) {
-        TODO("Not yet implemented")
-    }
-
-}

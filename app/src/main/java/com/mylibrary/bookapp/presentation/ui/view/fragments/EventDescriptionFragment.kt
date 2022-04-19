@@ -1,5 +1,6 @@
 package com.mylibrary.bookapp.presentation.ui.view.fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import com.mylibrary.bookapp.presentation.ui.viewmodel.EventViewModel
 import com.mylibrary.core.data.Status
 import com.mylibrary.core.domain.EventDescriptionResponse
 import dagger.hilt.android.AndroidEntryPoint
+import mylibrary.bookapp.R
 import mylibrary.bookapp.databinding.FragmentEventDescriptionBinding
 
 @AndroidEntryPoint
@@ -21,6 +23,7 @@ class EventDescriptionFragment : Fragment() {
     private val args: EventDescriptionFragmentArgs by navArgs()
     private val eventViewModel: EventViewModel by viewModels()
     private var eventId: Int = 0
+    private var currentEvent: EventDescriptionResponse? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +38,10 @@ class EventDescriptionFragment : Fragment() {
 
         eventId = args.eventId
         initObservers()
+
+        binding.fabAddEvent.setOnClickListener {
+            showDialogConfirmation()
+        }
     }
 
     private fun initObservers() {
@@ -43,6 +50,7 @@ class EventDescriptionFragment : Fragment() {
                 when (eventDescription.status) {
                     Status.SUCCESS -> {
                         showEventDescription(eventDescription.data)
+                        currentEvent = eventDescription.data
                         hideProgress()
                     }
                     Status.LOADING -> {
@@ -65,7 +73,7 @@ class EventDescriptionFragment : Fragment() {
             Glide.with(requireContext()).load(eventDescription?.data?.avatar).into(ivEvent)
             tvName.text =
                 "${eventDescription?.data?.first_name} ${eventDescription?.data?.last_name}"
-            tvDescription.text = "${eventDescription?.data?.last_name}"
+            tvDescription.text = "${eventDescription?.support?.text}"
             tvContact.text = "${eventDescription?.data?.email}"
 
             Glide.with(requireContext()).load(
@@ -82,5 +90,23 @@ class EventDescriptionFragment : Fragment() {
 
     private fun hideProgress() {
         binding.progressBar.visibility = View.INVISIBLE
+    }
+
+    private fun showDialogConfirmation() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setMessage(R.string.add_event)
+            .setPositiveButton(
+                R.string.accept
+            ) { dialog, id ->
+                currentEvent?.let { event ->
+                    eventViewModel.saveEvent(event)
+                }
+            }
+            .setNegativeButton(
+                R.string.cancel
+            ) { dialog, id ->
+                dialog.dismiss()
+            }
+        builder.create().show()
     }
 }
