@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
@@ -12,5 +13,9 @@
             android:id="@+id/nav_my_events"
             android:icon="@android:drawable/ic_menu_agenda"
             android:title="@string/menu_my_events" />
+        <item
+            android:id="@+id/nav_find_books"
+            android:icon="@android:drawable/ic_menu_search"
+            android:title="@string/find_books"/>
     </group>
 </menu>

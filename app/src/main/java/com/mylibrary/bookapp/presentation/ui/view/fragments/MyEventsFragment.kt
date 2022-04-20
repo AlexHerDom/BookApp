@@ -1,5 +1,6 @@
 package com.mylibrary.bookapp.presentation.ui.view.fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mylibrary.bookapp.presentation.ui.adapter.EventAdapter
 import com.mylibrary.bookapp.presentation.ui.viewmodel.EventViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import mylibrary.bookapp.R
 import mylibrary.bookapp.databinding.FragmentMyEventsBinding
 
 @AndroidEntryPoint
@@ -65,9 +67,20 @@ class MyEventsFragment : Fragment() {
         }
 
         eventAdapter.deleteItem.observe(viewLifecycleOwner) { eventPair ->
-            eventViewModel.deleteEventById(eventPair.second)
-
-            myEventsObserver()
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setMessage(R.string.cancel_event_attendance)
+                .setPositiveButton(
+                    R.string.accept
+                ) { _, _ ->
+                    eventViewModel.deleteEventById(eventPair.second)
+                    myEventsObserver()
+                }
+                .setNegativeButton(
+                    R.string.cancel
+                ) { dialog, id ->
+                    dialog.dismiss()
+                }
+            builder.create().show()
         }
     }
 }

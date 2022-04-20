@@ -26,12 +26,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.mylibrary.bookapp.presentation.ui.view.fragments.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
-
-    <fragment
         android:id="@+id/eventDescriptionFragment"
         android:name="com.mylibrary.bookapp.presentation.ui.view.fragments.EventDescriptionFragment"
         android:label="EventDescriptionFragment"
@@ -40,5 +34,11 @@
             android:name="eventId"
             app:argType="integer" />
     </fragment>
+
+    <fragment
+        android:id="@+id/nav_find_books"
+        android:name="com.mylibrary.bookapp.presentation.ui.view.fragments.FindBooksFragment"
+        android:label="@string/find_books"
+        tools:layout="@layout/fragment_find_books" />
 
 </navigation>

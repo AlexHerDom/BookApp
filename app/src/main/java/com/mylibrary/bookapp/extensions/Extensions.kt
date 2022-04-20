@@ -2,15 +2,12 @@ package com.mylibrary.bookapp.extensions
 
 import com.mylibrary.bookapp.db.tables.EventEntity
 import com.mylibrary.core.data.Resource
-import com.mylibrary.core.domain.Book
-import com.mylibrary.core.domain.Event
-import com.mylibrary.core.domain.EventDescriptionResponse
-import com.mylibrary.core.domain.EventResponse
+import com.mylibrary.core.domain.*
 import retrofit2.Response
 
-fun Response<List<Book>>.convertToDomainBook(): Resource<List<Book>> {
+fun Response<BooksResponse>.convertToDomainBook(): Resource<BooksResponse> {
     return if (this.isSuccessful)
-        Resource.success(this.body().orEmpty())
+        Resource.success(this.body())
     else Resource.error(msg = "Ocurrio un error", null)
 }
 

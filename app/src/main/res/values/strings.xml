@@ -16,4 +16,6 @@
     <string name="accept">Aceptar</string>
     <string name="cancel">Cancelar</string>
     <string name="add_event">Deseas asistir al evento?</string>
+    <string name="cancel_event_attendance">Deseas cancelar tu asistencia al evento?</string>
+    <string name="find_books">Buscar Libros</string>
 </resources>

@@ -13,8 +13,8 @@ import mylibrary.bookapp.databinding.ItemEventBinding
 
 class EventAdapter(
     private val isDelete: Boolean,
-    private val listener: (com.mylibrary.core.domain.Event) -> Unit
-) : ListAdapter<com.mylibrary.core.domain.Event, EventAdapter.EventViewHolder>(
+    private val listener: (Event) -> Unit
+) : ListAdapter<Event, EventAdapter.EventViewHolder>(
     DiffCallback()
 ) {
 
@@ -30,15 +30,15 @@ class EventAdapter(
         holder.bind(currentItem)
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<com.mylibrary.core.domain.Event>() {
+    class DiffCallback : DiffUtil.ItemCallback<Event>() {
         override fun areItemsTheSame(
-            oldItem: com.mylibrary.core.domain.Event,
-            newItem: com.mylibrary.core.domain.Event
+            oldItem: Event,
+            newItem: Event
         ) = oldItem.id == newItem.id
 
         override fun areContentsTheSame(
-            oldItem: com.mylibrary.core.domain.Event,
-            newItem: com.mylibrary.core.domain.Event
+            oldItem: Event,
+            newItem: Event
         ) = oldItem == newItem
     }
 
@@ -49,7 +49,7 @@ class EventAdapter(
         private val isDelete: Boolean
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(event: com.mylibrary.core.domain.Event) {
+        fun bind(event: Event) {
             binding.apply {
                 Glide.with(binding.root.context).load(event.avatar).into(ivEvent);
                 tvTitle.text = event.first_name

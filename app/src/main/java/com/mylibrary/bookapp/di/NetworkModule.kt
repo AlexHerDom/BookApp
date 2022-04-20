@@ -19,5 +19,4 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideApiClient(retrofit: Retrofit): ApiInterface = retrofit.create(ApiInterface::class.java)
-
 }
