@@ -24,7 +24,7 @@ class FindBooksFragment : Fragment() {
     private var _binding: FragmentFindBooksBinding? = null
     private val binding get() = _binding!!
     private val bookViewModel: BookViewModel by viewModels()
-    lateinit var bookAdapter: BookAdapter
+    private lateinit var bookAdapter: BookAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,

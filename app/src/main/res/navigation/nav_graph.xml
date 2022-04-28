@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_nav_home_to_eventDescriptionFragment"
             app:destination="@id/eventDescriptionFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_createEventFragment"
+            app:destination="@id/createEventFragment" />
     </fragment>
 
     <fragment
@@ -40,5 +43,10 @@
         android:name="com.mylibrary.bookapp.presentation.ui.view.fragments.FindBooksFragment"
         android:label="@string/find_books"
         tools:layout="@layout/fragment_find_books" />
+    <fragment
+        android:id="@+id/createEventFragment"
+        android:name="com.mylibrary.bookapp.presentation.ui.view.fragments.CreateEventFragment"
+        android:label="fragment_create_event"
+        tools:layout="@layout/fragment_create_event" />
 
 </navigation>

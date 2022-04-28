@@ -77,7 +77,7 @@ class MyEventsFragment : Fragment() {
                 }
                 .setNegativeButton(
                     R.string.cancel
-                ) { dialog, id ->
+                ) { dialog, _ ->
                     dialog.dismiss()
                 }
             builder.create().show()

@@ -11,8 +11,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BookViewModel @Inject constructor(
-    private val getBooksUseCase: GetBooksUseCase,
-    private val networkHelper: NetworkHelper
+    private val getBooksUseCase: GetBooksUseCase
 ) : ViewModel() {
 
     fun getBooks() = liveData(Dispatchers.IO) {

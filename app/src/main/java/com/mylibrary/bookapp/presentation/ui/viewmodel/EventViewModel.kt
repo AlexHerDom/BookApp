@@ -20,8 +20,7 @@ class EventViewModel @Inject constructor(
     private val getEventDescriptionUseCase: GetEventDescriptionUseCase,
     private val saveEventUseCase: SaveEventUseCase,
     private val getMyEventsUseCase: GetMyEventsUseCase,
-    private val deleteEventUseCase: DeleteEventUseCase,
-    private val networkHelper: NetworkHelper
+    private val deleteEventUseCase: DeleteEventUseCase
 ) : ViewModel() {
 
 

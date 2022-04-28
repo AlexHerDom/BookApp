@@ -52,6 +52,8 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:${rootProject.ext.fragment_ktx}"
     //Activity
     implementation "androidx.activity:activity-ktx:1.4.0"
+    //Fragment
+    implementation "androidx.fragment:fragment-ktx:1.4.1"
     //ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
     //LiveData
@@ -75,6 +77,7 @@ dependencies {
     //Room
     implementation 'androidx.room:room-runtime:2.5.0-alpha01'
     kapt 'androidx.room:room-compiler:2.5.0-alpha01'
+
 }
 
 kapt {

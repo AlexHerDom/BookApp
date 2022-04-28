@@ -49,7 +49,7 @@ class EventDescriptionFragment : Fragment() {
             .observe(viewLifecycleOwner) { eventDescription ->
                 when (eventDescription.status) {
                     Status.SUCCESS -> {
-                        showEventDescription(eventDescription.data)
+                        showEventDescription(eventDescription.data!!)
                         currentEvent = eventDescription.data
                         hideProgress()
                     }
@@ -68,14 +68,18 @@ class EventDescriptionFragment : Fragment() {
             }
     }
 
-    private fun showEventDescription(eventDescription: EventDescriptionResponse?) {
+    private fun showEventDescription(eventDescription: EventDescriptionResponse) {
         binding.apply {
-            Glide.with(requireContext()).load(eventDescription?.data?.avatar).into(ivEvent)
-            tvName.text =
-                "${eventDescription?.data?.first_name} ${eventDescription?.data?.last_name}"
-            tvDescription.text = "${eventDescription?.support?.text}"
-            tvContact.text = "${eventDescription?.data?.email}"
+            with(eventDescription) {
+                Glide.with(requireContext()).load(data.avatar).into(ivEvent)
+                tvName.text = resources.getString(
+                    R.string.description_full_name,
+                    data.first_name, data.last_name
+                )
 
+                tvDescription.text = support.text
+                tvContact.text = data.email
+            }
             Glide.with(requireContext()).load(
                 "https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap" +
                         "&markers=color:red%7Clabel:C%7C40.718217,-73.998284" +
