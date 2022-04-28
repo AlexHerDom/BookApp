@@ -1,15 +1,11 @@
 package com.mylibrary.bookapp.presentation.ui.view.fragments
 
 import android.Manifest
-import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.Activity.RESULT_OK
-import android.content.ActivityNotFoundException
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -19,10 +15,15 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import com.mylibrary.bookapp.presentation.ui.viewmodel.EventViewModel
+import com.mylibrary.core.domain.Data
+import com.mylibrary.core.domain.EventDescriptionResponse
+import dagger.hilt.android.AndroidEntryPoint
+import mylibrary.bookapp.R
 import mylibrary.bookapp.databinding.FragmentCreateEventBinding
 import java.io.File
 import java.io.IOException
@@ -30,9 +31,11 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
+@AndroidEntryPoint
 class CreateEventFragment : Fragment() {
 
     private lateinit var binding: FragmentCreateEventBinding
+    private val eventViewModel: EventViewModel by viewModels()
 
     private var permissionLauncher: ActivityResultLauncher<Array<String>>? = null
     private var isCameraPermissionGranted = false
@@ -72,7 +75,29 @@ class CreateEventFragment : Fragment() {
         }
 
         binding.fabAddEvent.setOnClickListener {
+            binding.apply {
+                eventViewModel.saveEvent(
+                    EventDescriptionResponse(
+                        Data(
+                            avatar = photoFile.toString(),
+                            email = tvContact.editText?.text.toString(),
+                            first_name = tvName.editText?.text.toString(),
+                            (50..500).random(),
+                            last_name = ""
+                        ),
+                        null
+                    )
+                )
+            }
 
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setMessage(R.string.event_saved)
+                .setPositiveButton(
+                    R.string.accept
+                ) { dialog, _ ->
+                    dialog.dismiss()
+                }
+            builder.create().show()
         }
     }
 

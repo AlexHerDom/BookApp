@@ -17,7 +17,7 @@
     <string name="cancel">Cancelar</string>
     <string name="add_event">Deseas asistir al evento?</string>
     <string name="cancel_event_attendance">Deseas cancelar tu asistencia al evento?</string>
-    <string name="find_books">Buscar Libros</string>
+    <string name="find_books">Libro</string>
     <string name="description_full_name">%s %s</string>
     <string name="txt_description">Descripcion</string>
     <string name="txt_contact">Contacto</string>
@@ -26,4 +26,5 @@
     <string name="dialog_permission_title">Permission required</string>
     <string name="dialog_permission_default_message">Default message</string>
     <string name="dialog_permission_button_positive">OK</string>
+    <string name="event_saved">Tu evento se guardo correctamente</string>
 </resources>

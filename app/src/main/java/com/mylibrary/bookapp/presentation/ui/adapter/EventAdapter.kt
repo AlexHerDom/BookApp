@@ -1,5 +1,6 @@
 package com.mylibrary.bookapp.presentation.ui.adapter
 
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,7 +52,10 @@ class EventAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(event: Event) {
             binding.apply {
-                Glide.with(binding.root.context).load(event.avatar).into(ivEvent);
+                if(!event.avatar.startsWith("/storage/")) {
+                    val myBitmap = BitmapFactory.decodeFile(event.avatar)
+                    ivEvent.setImageBitmap(myBitmap)
+                }else Glide.with(binding.root.context).load(event.avatar).into(ivEvent)
                 tvTitle.text = event.first_name
                 tvDesc.text = event.last_name
                 tvContact.text = event.email

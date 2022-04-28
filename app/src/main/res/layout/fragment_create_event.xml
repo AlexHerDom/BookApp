@@ -23,8 +23,6 @@
         android:layout_marginEnd="16dp"
         android:hint="@string/find_books"
         android:textStyle="bold"
-        android:clickable="false"
-        android:focusable="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cvCamera">
@@ -32,8 +30,6 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="false"
-            android:focusable="false"
             android:background="@color/white" />
 
     </com.google.android.material.textfield.TextInputLayout>

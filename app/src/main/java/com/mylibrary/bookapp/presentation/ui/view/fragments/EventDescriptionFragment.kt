@@ -77,7 +77,7 @@ class EventDescriptionFragment : Fragment() {
                     data.first_name, data.last_name
                 )
 
-                tvDescription.text = support.text
+                tvDescription.text = support?.text
                 tvContact.text = data.email
             }
             Glide.with(requireContext()).load(
